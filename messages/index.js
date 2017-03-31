@@ -19,8 +19,8 @@ function (session){
         if (err) {
             return session.send('Oops. Error reading file.');
         }
-    var text= Buffer.from(data).toString();
-    session.send(text);
+    var num= Buffer.from(data).length();
+    builder.Prompts.text(session,'Resultado: '+num);
     }
 )}
 ]);
