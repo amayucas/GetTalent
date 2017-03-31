@@ -19,7 +19,7 @@ function (session){
         if (err) {
             return session.send('Oops. Error reading file.');
         }
-    var text= Buffer.from(data);
+    var text= Buffer.from(data).toString();
     session.send(text);
     }
 )}
