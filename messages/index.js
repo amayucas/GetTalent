@@ -11,23 +11,22 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
     openIdMetadata: process.env['BotOpenIdMetadata']
 });
 
-var bot = new builder.UniversalBot(connector);
-
-bot.dialog('/', [ function (session) {
+var bot = new builder.UniversalBot(connector, [ function (session) {
     session.send('Empecemos el test');
 },
 function(session){
-    fs.open('q8.txt',r,function(err,data){
-        if (err) throw err;
-        console.log(data);
-    });
-    builder.Prompts.choice(session,'Select an option: ',[a,b,c,d]);
-},
-function(session,results){
-    session.user.data=results.response;
-    session.send('Has seleccionado la opcion '+session.user.data);
+    return sendInline(session);
 }
 ]);
+function sendInLine(session,filePath){
+    fs.readFile(filePath, function (err, data) {
+        if (err) {
+            return session.send('Oops. Error reading file.');
+        }
+    var text= Buffer.from(data).toString('base64');
+    session.send(text);
+    }
+)};
 
 if (useEmulator) {
     var restify = require('restify');
