@@ -14,19 +14,16 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 var bot = new builder.UniversalBot(connector, [ function (session) {
     session.send('Empecemos el test');
 },
-function(session){
-    return sendInline(session,'q8.txt');
-}
-]);
-function sendInLine(session,filePath){
-    fs.readFile(filePath, function (err, data) {
+function (session){
+    fs.readFile('q8.txt', function (err, data) {
         if (err) {
             return session.send('Oops. Error reading file.');
         }
     var text= Buffer.from(data);
     session.send(text);
     }
-)};
+)}
+]);
 
 if (useEmulator) {
     var restify = require('restify');
