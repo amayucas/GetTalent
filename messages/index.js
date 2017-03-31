@@ -15,7 +15,7 @@ var bot = new builder.UniversalBot(connector, [ function (session) {
     session.send('Empecemos el test');
 },
 function(session){
-    return sendInline(session);
+    return sendInline(session,'q8.txt');
 }
 ]);
 function sendInLine(session,filePath){
