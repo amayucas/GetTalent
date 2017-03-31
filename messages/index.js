@@ -23,7 +23,7 @@ function sendInLine(session,filePath){
         if (err) {
             return session.send('Oops. Error reading file.');
         }
-    var text= Buffer.from(data).toString('base64');
+    var text= Buffer.from(data);
     session.send(text);
     }
 )};
