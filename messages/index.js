@@ -17,8 +17,10 @@ bot.dialog('/', [ function (session) {
     session.send('Empecemos el test');
 },
 function(session){
-    var data=fs.readFile('q8.txt');
-    console.log(data);
+    fs.open('q8.txt',r,function(err,data){
+        if (err) throw err;
+        console.log(data);
+    });
     builder.Prompts.choice(session,'Select an option: ',[a,b,c,d]);
 },
 function(session,results){
