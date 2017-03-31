@@ -14,13 +14,11 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 var bot = new builder.UniversalBot(connector);
 
 bot.dialog('/', [ function (session) {
-    session.send('Empezemos el test');
+    session.send('Empecemos el test');
 },
 function(session){
-    fs.readFile("q8.txt",function(error,data){
-        console.log(data);
-    })
-    session.send(pregunta);
+    var data=fs.readFile('q8.txt');
+    console.log(data);
     builder.Prompts.choice(session,'Select an option: ',[a,b,c,d]);
 },
 function(session,results){
