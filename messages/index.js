@@ -12,16 +12,15 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 });
 
 var bot = new builder.UniversalBot(connector, [ function (session) {
-    builder.Prompts.text(session,'Empecemos el test.¿Como te llamas?');
+    builder.Prompts.text(session,'Empecemos el test.');
 },
 function (session,fs,results){
-    session.userData.name=results.response;
     fs.readFile('q8.txt', function (err, data) {
         if (err) {
             return session.send('Oops. Error leyendo el fichero.');
         }
-    var msg = new builder.Message(session).text();
-    builder.Prompts.text(session,'Vale '+session.userData.name+'. Resultado: '+text);
+    var msg = new builder.Message(session);
+    session.send(msg);
     }
 )}
 ]);
