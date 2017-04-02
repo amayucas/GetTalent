@@ -21,7 +21,7 @@ function (session,fs,results){
             return session.send('Oops. Error leyendo el fichero.');
         }
     var text= Buffer.from(data);
-    builder.Prompts.text(session,'Vale '+session.userData.name+'. Resultado: '+num);
+    builder.Prompts.text(session,'Vale '+session.userData.name+'. Resultado: '+text);
     }
 )}
 ]);
