@@ -20,7 +20,7 @@ function (session,fs,results){
         if (err) {
             return session.send('Oops. Error leyendo el fichero.');
         }
-    var text= Buffer.from(data);
+    var text= fs.createReadStream('q8.txt', {start: 0, end: 10});
     builder.Prompts.text(session,'Vale '+session.userData.name+'. Resultado: '+text);
     }
 )}
