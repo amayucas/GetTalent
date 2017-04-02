@@ -19,8 +19,8 @@ function (session,fs,results){
         if (err) {
             return session.send('Oops. Error leyendo el fichero.');
         }
-    var msg = new builder.Message(session);
-    session.send(msg);
+    var msg = new builder.Message(session).ntext('texto',15);
+    session.send('texto');
     }
 )}
 ]);
