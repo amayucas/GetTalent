@@ -15,23 +15,21 @@ var bot = new builder.UniversalBot(connector, [ function (session,next) {
 },
 function (session,results){
     session.userData.name=results.response;
-    console.log(session.userData.name);
-    session.Prompts.text(session,'Indica cuantas preguntas quieres que te haga: ');
+    session.Prompts.text(session,session.userData.name+', Indica cuantas preguntas quieres que te haga: ');
 },
-
 function (session,results){
     var num=results.response.num;
     for(var i=0;i<num;i++){
+        session.send('Pregunta: '+(i+1));
         session.beginDialog('/pregunta');
         var respuesta=results.response.entity;
-        console.log(respuesta);
+        //Aquí pondríamos el archivo de texto de destino
         }
 }
 ]);
 bot.dialog('/pregunta',function (session) {
         builder.Prompts.choice(session,"Si tuvieras que elegir entre estos colores cual elegírias:",['Rojo','Amarrillo','Verde','Azul']);
 });
-
 if (useEmulator) {
     var restify = require('restify');
     var server = restify.createServer();
