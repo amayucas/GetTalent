@@ -43,8 +43,7 @@ if (useEmulator) {
     server.listen(3978, function() {
         console.log('test bot endpont at http://localhost:3978/api/messages');
     });
-    server.post('/api/messages', connector.listen());
-    session.send('Bienvenido al bot de preguntas getTalent. A continuación se le hara una serie de preguntas. Por favor, Indique su nombre:');    
+    server.post('/api/messages', connector.listen());    
 } else {
     module.exports = { default: connector.listen() }
 }
