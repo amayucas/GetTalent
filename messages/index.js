@@ -13,20 +13,20 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 var bot = new builder.UniversalBot(connector);
 bot.dialog('/', [ function (session) {
     builder.Prompts.text(session,'Empecemos el test.¿Como te llamas?');
-},
-function (session,results){
-    session.userData.name=results.response;
-    session.Prompts.text(session,session.userData.name+', Indica cuantas preguntas quieres que te haga: ');
-},
-function (session,results){
-    var num=results.response;
-    for(var i=0;i<num;i++){
-        session.send('Pregunta: '+(i+1));
-        session.beginDialog('/pregunta');
-        var respuesta=results.response.entity;
-        //Aquí pondríamos el archivo de texto de destino
+    },
+    function (session,results){
+        session.userData.name=results.response;
+        session.Prompts.text(session,'Hola ' +session.userData.name+ ', Indica cuantas preguntas quieres que te haga: ');
+    },
+    function (session,results){
+        var num=results.response;
+        for(var i=0;i<num;i++){
+            session.send('Pregunta: '+(i+1));
+            session.beginDialog('/pregunta');
+            var respuesta=results.response.entity;
+            //Aquí pondríamos el archivo de texto de destino
         }
-}
+    }
 ]);
 bot.dialog('/pregunta',function (session) {
         builder.Prompts.choice(session,"Si tuvieras que elegir entre estos colores cual elegírias:",['Rojo','Amarrillo','Verde','Azul']);
