@@ -1,7 +1,6 @@
 "use strict";
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
-var fs=require('fs');
 var useEmulator = (process.env.NODE_ENV == 'development');
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
@@ -12,17 +11,28 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 });
 
 var bot = new builder.UniversalBot(connector, [ function (session,next) {
-    builder.Prompts.text(session,'Empecemos el test.');
+    builder.Prompts.text(session,'Empecemos el test.¿Como te llamas?');
 },
-function (session,fs,results){
-    fs.readFile('q8.txt', function (err, data) {
-        if (err) {
-            return session.send('Oops. Error leyendo el fichero.');
+function (session,results){
+    session.userData.name=results.response;
+    console.log(session.userData.name);
+    session.Prompts.text(session,'Indica cuantas preguntas quieres que te haga: ');
+},
+
+function (session,results){
+    var num=results.response.num;
+    for(var i=0;i<num;i++){
+        session.beginDialog('/pregunta');
+        function(session,results){
+            var respuesta=results.response.entity;
+            console.log(respuesta);
         }
-    console.log(data.toString());
     }
-)}
+}
 ]);
+bot.dialog('/pregunta',function (session) {
+        builder.Prompts.choice(session,"Si tuvieras que elegir entre estos colores cual elegírias:",['Rojo','Amarrillo','Verde','Azul']);
+});
 
 if (useEmulator) {
     var restify = require('restify');
