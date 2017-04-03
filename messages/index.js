@@ -16,7 +16,7 @@ bot.dialog('/', [ function (session) {
     },
     function (session,results){
         session.userData.name=results.response;
-        session.Prompts.text(session,'Hola ' +session.userData.name+ ', Indica cuantas preguntas quieres que te haga: ');
+        session.send('Hola ' +session.userData.name+ ', Indica cuantas preguntas quieres que te haga: ');
     },
     function (session,results){
         var num=results.response;
