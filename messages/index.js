@@ -10,7 +10,8 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
     openIdMetadata: process.env['BotOpenIdMetadata']
 });
 
-var bot = new builder.UniversalBot(connector, [ function (session) {
+var bot = new builder.UniversalBot(connector);
+bot.dialog('/', [ function (session) {
     builder.Prompts.text(session,'Empecemos el test.¿Como te llamas?');
 },
 function (session,results){
