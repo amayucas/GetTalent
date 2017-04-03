@@ -18,7 +18,7 @@ function (session,results){
     session.Prompts.text(session,session.userData.name+', Indica cuantas preguntas quieres que te haga: ');
 },
 function (session,results){
-    var num=results.response.num;
+    var num=results.response;
     for(var i=0;i<num;i++){
         session.send('Pregunta: '+(i+1));
         session.beginDialog('/pregunta');
