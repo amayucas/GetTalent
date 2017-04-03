@@ -16,16 +16,21 @@ bot.dialog('/', [ function (session) {
     },
     function (session,results){
         session.userData.name=results.response;
-        session.send('Hola ' +session.userData.name+ ', Indica cuantas preguntas quieres que te haga: ');
+        session.Prompts.text(session,'Hola ' +session.userData.name+ ', Indica cuantas preguntas quieres que te haga: ');
     },
     function (session,results){
         var num=results.response;
-        for(var i=0;i<num;i++){
-            session.send('Pregunta: '+(i+1));
+        var i=1;
+        for(i;i<num;i++){
+            session.send('Pregunta: '+i);
             session.beginDialog('/pregunta');
             var respuesta=results.response.entity;
             //Aquí pondríamos el archivo de texto de destino
         }
+    },
+    function (session) {
+        builder.Prompts.text(session,'Vale ' +session.userData.name+'.');
+        session.endDialog('Gracias por contestar a mis preguntas.Nos vemos.');
     }
 ]);
 bot.dialog('/pregunta',function (session) {
