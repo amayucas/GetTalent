@@ -23,8 +23,7 @@ bot.dialog('/', [function (session) {
         var cant=results.response;
         for(var i=1;i<=cant;i++){
             session.send('Pregunta '+i+' :');
-            session.beginDialog('/pregunta');
-            var respuesta=results.response.entity;
+            return session.beginDialog('/pregunta');
             //Aquí pondríamos el archivo de texto de destino
         };
     },
