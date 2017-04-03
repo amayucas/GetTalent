@@ -22,7 +22,7 @@ bot.dialog('/', [function (session) {
     function (session, results) {
         var cant=results.response;
         for(var i=1;i<=cant;i++){
-            builder.Prompts.text(session,'Pregunta: '+i);
+            session.send('Pregunta '+i+' :');
             session.beginDialog('/pregunta');
             var respuesta=results.response.entity;
             //Aquí pondríamos el archivo de texto de destino
