@@ -23,9 +23,8 @@ function (session,results){
     var num=results.response.num;
     for(var i=0;i<num;i++){
         session.beginDialog('/pregunta');
-        function(session,results){
-            var respuesta=results.response.entity;
-            console.log(respuesta);
+        var respuesta=results.response.entity;
+        console.log(respuesta);
         }
     }
 }
