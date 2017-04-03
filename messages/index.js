@@ -26,7 +26,6 @@ function (session,results){
         var respuesta=results.response.entity;
         console.log(respuesta);
         }
-    }
 }
 ]);
 bot.dialog('/pregunta',function (session) {
