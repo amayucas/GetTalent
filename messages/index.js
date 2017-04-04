@@ -33,7 +33,7 @@ bot.dialog('/preguntas', [
         session.dialogData.form[field] = results.response;
 
         // Condición de salida
-        if (session.dialogData.index >= questions.length+num) {
+        if (session.dialogData.index >= questions.length+session.dialogData.form[num]) {
             // Podemos mostrar los resultados o solo dar las gracias
             session.endDialogWithResult({ response: session.dialogData.form });
         } else {
