@@ -33,11 +33,10 @@ bot.dialog('/preguntas', [
         session.dialogData.form[field] = results.response;
 
         // Condición de salida
-        if (session.dialogData.index >= questions.length+session.dialogData.form['num']) {
+        if (session.dialogData.index >=session.dialogData.form['num']+1) {
             // Podemos mostrar los resultados o solo dar las gracias
             session.endDialogWithResult({ response: session.dialogData.form });
         } else {
-            if(session.dialogData.index<=2)
             // Siguiente pregunta
             session.replaceDialog('/preguntas', session.dialogData);
         }
@@ -46,8 +45,28 @@ bot.dialog('/preguntas', [
 
 var questions = [
     { field: 'num', prompt: "Bienvenido al bot GetTalent.Este es un bot de preguntas. Por favor, indica cuantas preguntas quieres que te haga:" },
-    { field: 'nombre', prompt: "Por favor, indica tu nombre:" },
-    { field: 'question', prompt: "¿Cuanto es 1+1?" }
+    { field: 'nombre', prompt: "Tus respuestas quedaran guardadas en nuestra base de datos.Por favor, indica tu nombre:" },
+    { field: 'question', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question2', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question3', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question4', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question5', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question6', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question7', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question8', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question9', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question10', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question11', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question12', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question13', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question14', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question15', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question16', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question17', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question18', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question19', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question20', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question21', prompt: "¿Cuanto es 1+1?" },
 ];
 if (useEmulator) {
     var restify = require('restify');
