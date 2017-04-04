@@ -22,7 +22,7 @@ bot.dialog('/',[function (session) {
     },
     function (session,results) {
         num=results.response;
-        session.beginDialog('/preguntas');
+        return session.beginDialog('/preguntas');
     },
     function (session, results) {
         builder.Prompts.text(session,"Gracias "+nombre+" por responder a mis preguntas");
