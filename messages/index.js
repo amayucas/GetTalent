@@ -19,8 +19,7 @@ var bot = new builder.UniversalBot(connector, [
         session.send("Gracias "+nombre+" por responder a mis preguntas");
     }
 ]);
-bot.dialog('/inicio',
-    function (session) {
+bot.dialog('/inicio',[function (session) {
         session.send('Bienvenido al bot GetTalent. Por favor, dime tu nombre: ');
     },
     function (session,results) {
@@ -31,7 +30,7 @@ bot.dialog('/inicio',
         num=results.response;
         session.beginDialog('/preguntas');
     }
-);
+]);
 //Preguntas que vamos a realizar y guardado de las respuestas
 bot.dialog('/preguntas', [
     function (session, args) {
