@@ -45,7 +45,7 @@ bot.dialog('/preguntas', [
 
 var questions = [
     { field: 'num', prompt: "Bienvenido al bot GetTalent.Este es un bot de preguntas. Por favor, indica cuantas preguntas quieres que te haga:" },
-    { field: 'question', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question', prompt: "¿Cuanto es 1+1?",choice: ['Avion','Suelo','Toro'] },
     { field: 'question2', prompt: "¿Cuanto es 1+1?" },
     { field: 'question3', prompt: "¿Cuanto es 1+1?" },
     { field: 'question4', prompt: "¿Cuanto es 1+1?" },
