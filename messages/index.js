@@ -12,7 +12,7 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 });
 var num=0;
 var bot = new builder.UniversalBot(connector);
-bot.dialog('/inicio',[function (session) {
+bot.dialog('/',[function (session) {
         session.send('Bienvenido al bot GetTalent. Por favor, dime tu nombre: ');
     },
     function (session,results) {
