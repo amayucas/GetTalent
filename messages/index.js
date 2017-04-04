@@ -15,7 +15,7 @@ var bot = new builder.UniversalBot(connector, [
         session.beginDialog('/preguntas');
     },
     function (session, results) {
-        session.send("Gracuas %(nombre)s, por responder a mis preguntas.", results.response);
+        session.send("Gracias %(nombre)s, por responder a mis preguntas.", results.response);
     }
 ]);
 
@@ -33,7 +33,7 @@ bot.dialog('/preguntas', [
         session.dialogData.form[field] = results.response;
 
         // Condición de salida
-        if (session.dialogData.index >=session.dialogData.form['num']+1) {
+        if (session.dialogData.index >=session.dialogData.form['num']) {
             // Podemos mostrar los resultados o solo dar las gracias
             session.endDialogWithResult({ response: session.dialogData.form });
         } else {
