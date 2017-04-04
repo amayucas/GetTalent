@@ -23,21 +23,16 @@ bot.dialog('/', [function (session) {
         var cant=results.response;
         for(var i=1;i<=cant;i++){
             respuesta(session,results,i);
-            session.send('Respuesta guardada');
             //Aquí pondríamos el archivo de texto de destino
         };
     },
     //Los datos los tengo guardados para usos posteriores
-    function (session) {
-        builder.Prompts.text(session,'Vale ' +session.userData.name+'.');
-        session.endDialog('Gracias por contestar a mis preguntas.Nos vemos.');
-    }
-]);
-function respuesta(session,results,i){
+    function respuesta(session,results,i){
     session.send('Pregunta '+i+' :');
     session.beginDialog('/pregunta');
     session.endDialog();
 }
+]);
 bot.dialog('/pregunta',function (session) {
         builder.Prompts.choice(session,"Si tuvieras que elegir entre estos colores cual elegírias:",['Rojo','Amarrillo','Verde','Azul']);
 });
