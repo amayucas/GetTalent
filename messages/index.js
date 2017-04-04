@@ -33,7 +33,6 @@ bot.dialog('/', [function (session) {
         session.endDialog('Gracias por contestar a mis preguntas.Nos vemos.');
     }
 ]);
-function 
 bot.dialog('/pregunta',function (session) {
         builder.Prompts.choice(session,"Si tuvieras que elegir entre estos colores cual elegírias:",['Rojo','Amarrillo','Verde','Azul']);
 });
