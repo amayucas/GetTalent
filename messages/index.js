@@ -16,14 +16,14 @@ var bot = new builder.UniversalBot(connector, [
         session.beginDialog('/preguntas');
     },
     function (session, results) {
-        session.send("Gracias %(nombre)s, por responder a mis preguntas.", results.response);
+        session.send("Gracias, por responder a mis preguntas.", results.response);
     }
 ]);
 
 bot.dialog('/preguntas', [
     function (session, args) {
         // Guardamos el estado inicial de los parametros
-        session.dialogData.index = args ? args.index : -1;
+        session.dialogData.index = args ? args.index : 0;
         session.dialogData.form = args ? args.form : {};
         // Preguntamos
         builder.Prompts.text(session, questions[session.dialogData.index].prompt);
@@ -33,7 +33,7 @@ bot.dialog('/preguntas', [
         var field = questions[session.dialogData.index++].field;
         session.dialogData.form[field] = results.response;
         // Condición de salida
-        if (session.dialogData.index >=session.dialogData.form['num']) {
+        if (session.dialogData.index >session.dialogData.form['num']) {
             // Podemos mostrar los resultados o solo dar las gracias
             session.endDialogWithResult({ response: session.dialogData.form });
         } else {
@@ -45,7 +45,6 @@ bot.dialog('/preguntas', [
 
 var questions = [
     { field: 'num', prompt: "Bienvenido al bot GetTalent.Este es un bot de preguntas. Por favor, indica cuantas preguntas quieres que te haga:" },
-    { field: 'nombre', prompt: "Tus respuestas quedaran guardadas en nuestra base de datos.Por favor, indica tu nombre:" },
     { field: 'question', prompt: "¿Cuanto es 1+1?" },
     { field: 'question2', prompt: "¿Cuanto es 1+1?" },
     { field: 'question3', prompt: "¿Cuanto es 1+1?" },
