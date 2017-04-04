@@ -10,48 +10,44 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
     stateEndpoint: process.env['BotStateEndpoint'],
     openIdMetadata: process.env['BotOpenIdMetadata']
 });
-var num=0;
-var bot = new builder.UniversalBot(connector);
-
-bot.dialog('/',[function (session) {
-        builder.Prompts.text(session,'Bienvenido al bot GetTalent. Por favor, dime tu nombre: ');
-    },
-    function (session,results) {
-        session.userData.name=results.response;
-        builder.Prompts.text(session,'Este es un bot de preguntas. Por favor, indica cuantas preguntas quieres que te haga: ');
-    },
-    function (session,results) {
-        num=results.response;
-        return session.beginDialog('/preguntas');
+var bot = new builder.UniversalBot(connector, [
+    function (session) {
+        session.beginDialog('/preguntas');
     },
     function (session, results) {
-        builder.Prompts.text(session,"Gracias "+nombre+" por responder a mis preguntas");
+        session.send("Gracuas %(nombre)s, por responder a mis preguntas.", results.response);
     }
 ]);
-//Preguntas que vamos a realizar y guardado de las respuestas
+
 bot.dialog('/preguntas', [
     function (session, args) {
-        // Guardamos el estado inicial
+        // Guardamos el estado inicial de los parametros
         session.dialogData.index = args ? args.index : 0;
         session.dialogData.form = args ? args.form : {};
-
-        // Prompt user for next field
+        // Preguntamos
         builder.Prompts.text(session, questions[session.dialogData.index].prompt);
     },
     function (session, results) {
-        // Save users reply
+        // Guardamos la respuesta
         var field = questions[session.dialogData.index++].field;
         session.dialogData.form[field] = results.response;
 
-        // Check for end of form
-        if (session.dialogData.index >= num) {
-            // Return completed form
+        // Condición de salida
+        if (session.dialogData.index >= questions.length+num) {
+            // Podemos mostrar los resultados o solo dar las gracias
             session.endDialogWithResult({ response: session.dialogData.form });
+        } else {
+            if(session.dialogData.index<=2)
+            // Siguiente pregunta
+            session.replaceDialog('/preguntas', session.dialogData);
         }
     }
 ]);
+
 var questions = [
-    { field: 'edad', prompt: "¿Cuantos años tienes?" }
+    { field: 'nombre', prompt: "Bienvenido al bot GetTalent. Por favor, dime tu nombre:" },
+    { field: 'num', prompt: "Este es un bot de preguntas. Por favor, indica cuantas preguntas quieres que te haga:" },
+    { field: 'question', prompt: "¿Cuanto es 1+1?" }
 ];
 if (useEmulator) {
     var restify = require('restify');
