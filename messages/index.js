@@ -22,24 +22,20 @@ bot.dialog('/', [function (session) {
     function (session, results) {
         var cant=results.response;
         for(var i=1;i<=cant;i++){
-            pregunta(session,i);
-            respuesta(session,results);
+            pregunta(i);
+            var respuesta=results.response;
             session.endDialog();
             //Aquí pondríamos el archivo de texto de destino
         };
     }
     //Los datos los tengo guardados para usos posteriores
 ]);
-function pregunta(session,i){
+function pregunta(i){
     session.send('Pregunta '+i+' :');
     session.beginDialog('/pregunta');
 }
-function respuesta(session,results){
-    var res=results.response;
-}
 bot.dialog('/pregunta',function (session) {
         builder.Prompts.choice(session,"Si tuvieras que elegir entre estos colores cual elegírias:",['Rojo','Amarrillo','Verde','Azul']);
-        return respuesta(session,results);
 });
 
 if (useEmulator) {
