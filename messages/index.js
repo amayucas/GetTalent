@@ -10,19 +10,27 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
     stateEndpoint: process.env['BotStateEndpoint'],
     openIdMetadata: process.env['BotOpenIdMetadata']
 });
+var num=0;
 var bot = new builder.UniversalBot(connector, [
     function (session) {
-        session.beginDialog('q&aDialog');
+        session.send('Bienvenido al bot GetTalent. Por favor, dime tu nombre: ');
+    },
+    function (session,results) {
+        session.userData.name=results.response;
+        session.send('Este es un bot de preguntas. Por favor, indica cuantas preguntas quieres que te haga: ');
+    },
+    function (session,results) {
+        num=results.response;
+        session.beginDialog('/preguntas');
     },
     function (session, results) {
-        session.send("Thanks %(name)s... You're %(age)s and located in %(state)s.", results.response);
+        session.send("Gracias "+session.userData.name+" por responder a mis preguntas");
     }
 ]);
-
-// Add Q&A dialog
-bot.dialog('q&aDialog', [
+//Preguntas que vamos a realizar y guardado de las respuestas
+bot.dialog('/preguntas', [
     function (session, args) {
-        // Save previous state (create on first call)
+        // Guardamos el estado inicial
         session.dialogData.index = args ? args.index : 0;
         session.dialogData.form = args ? args.form : {};
 
@@ -35,20 +43,15 @@ bot.dialog('q&aDialog', [
         session.dialogData.form[field] = results.response;
 
         // Check for end of form
-        if (session.dialogData.index >= questions.length) {
+        if (session.dialogData.index >= num) {
             // Return completed form
             session.endDialogWithResult({ response: session.dialogData.form });
-        } else {
-            // Next field
-            session.replaceDialog('q&aDialog', session.dialogData);
         }
     }
 ]);
 
 var questions = [
-    { field: 'name', prompt: "What's your name?" },
-    { field: 'age', prompt: "How old are you?" },
-    { field: 'state', prompt: "What state are you in?" }
+    { field: 'edad', prompt: "¿Cuantos años tienes?" }
 ];
 if (useEmulator) {
     var restify = require('restify');
