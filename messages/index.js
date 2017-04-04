@@ -12,19 +12,20 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 });
 var num=0;
 var bot = new builder.UniversalBot(connector);
+
 bot.dialog('/',[function (session) {
-        session.send('Bienvenido al bot GetTalent. Por favor, dime tu nombre: ');
+        builder.Prompts.text(session,'Bienvenido al bot GetTalent. Por favor, dime tu nombre: ');
     },
     function (session,results) {
-        var nombre=results.response;
-        session.send('Este es un bot de preguntas. Por favor, indica cuantas preguntas quieres que te haga: ');
+        session.userData.name=results.response;
+        builder.Prompts.text(session,'Este es un bot de preguntas. Por favor, indica cuantas preguntas quieres que te haga: ');
     },
     function (session,results) {
         num=results.response;
         session.beginDialog('/preguntas');
     },
     function (session, results) {
-        session.send("Gracias "+nombre+" por responder a mis preguntas");
+        builder.Prompts.text(session,"Gracias "+nombre+" por responder a mis preguntas");
     }
 ]);
 //Preguntas que vamos a realizar y guardado de las respuestas
