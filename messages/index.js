@@ -66,7 +66,7 @@ var questions = [
     { field: 'question18', prompt: "¿Cuanto es 1+1?" },
     { field: 'question19', prompt: "¿Cuanto es 1+1?" },
     { field: 'question20', prompt: "¿Cuanto es 1+1?" },
-    { field: 'question21', prompt: "¿Cuanto es 1+1?" },
+    { field: 'question21', prompt: "¿Cuanto es 1+1?" }
 ];
 if (useEmulator) {
     var restify = require('restify');
