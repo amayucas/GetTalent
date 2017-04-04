@@ -24,6 +24,7 @@ bot.dialog('/', [function (session) {
         for(var i=1;i<=cant;i++){
             session.send('Pregunta '+i+' :');
             session.beginDialog('/pregunta');
+            respuesta(session,results);
             //Aquí pondríamos el archivo de texto de destino
         };
     },
@@ -33,6 +34,9 @@ bot.dialog('/', [function (session) {
         session.endDialog('Gracias por contestar a mis preguntas.Nos vemos.');
     }
 ]);
+function respuesta(session,results){
+    var res=results.response.entity;
+}
 bot.dialog('/pregunta',function (session) {
         builder.Prompts.choice(session,"Si tuvieras que elegir entre estos colores cual elegírias:",['Rojo','Amarrillo','Verde','Azul']);
 });
