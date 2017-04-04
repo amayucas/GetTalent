@@ -10,6 +10,7 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
     stateEndpoint: process.env['BotStateEndpoint'],
     openIdMetadata: process.env['BotOpenIdMetadata']
 });
+var inicio=1;
 var bot = new builder.UniversalBot(connector, [
     function (session) {
         session.beginDialog('/preguntas');
@@ -33,7 +34,7 @@ bot.dialog('/preguntas', [
         session.dialogData.form[field] = results.response;
 
         // Condición de salida
-        if (session.dialogData.index >=(session.dialogData.form['num'] + 2)) {
+        if (session.dialogData.index >session.dialogData.form['num'] +inicio) {
             // Podemos mostrar los resultados o solo dar las gracias
             session.endDialogWithResult({ response: session.dialogData.form });
         } else {
