@@ -10,7 +10,7 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
     stateEndpoint: process.env['BotStateEndpoint'],
     openIdMetadata: process.env['BotOpenIdMetadata']
 });
-var inicio=0;
+var inicio=1;
 var bot = new builder.UniversalBot(connector, [
     function (session) {
         session.beginDialog('/preguntas');
