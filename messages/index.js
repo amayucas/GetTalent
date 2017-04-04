@@ -13,6 +13,14 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 var num=0;
 var bot = new builder.UniversalBot(connector, [
     function (session) {
+       session.beginDialog('/inicio');
+    },
+    function (session, results) {
+        session.send("Gracias "+nombre+" por responder a mis preguntas");
+    }
+]);
+bot.dialog('/inicio',
+    function (session) {
         session.send('Bienvenido al bot GetTalent. Por favor, dime tu nombre: ');
     },
     function (session,results) {
@@ -22,11 +30,8 @@ var bot = new builder.UniversalBot(connector, [
     function (session,results) {
         num=results.response;
         session.beginDialog('/preguntas');
-    },
-    function (session, results) {
-        session.send("Gracias "+nombre+" por responder a mis preguntas");
     }
-]);
+);
 //Preguntas que vamos a realizar y guardado de las respuestas
 bot.dialog('/preguntas', [
     function (session, args) {
