@@ -36,7 +36,7 @@ bot.dialog('/', [function (session) {
 function respuesta(session,results,i){
     session.send('Pregunta '+i+' :');
     session.beginDialog('/pregunta');
-    var res=results.response.entity;
+    session.endDialog();
 }
 bot.dialog('/pregunta',function (session) {
         builder.Prompts.choice(session,"Si tuvieras que elegir entre estos colores cual elegírias:",['Rojo','Amarrillo','Verde','Azul']);
