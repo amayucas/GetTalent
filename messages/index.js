@@ -45,8 +45,8 @@ bot.dialog('/preguntas', [
 ]);
 
 var questions = [
-    { field: 'nombre', prompt: "Bienvenido al bot GetTalent. Por favor, dime tu nombre:" },
-    { field: 'num', prompt: "Este es un bot de preguntas. Por favor, indica cuantas preguntas quieres que te haga:" },
+    { field: 'num', prompt: "Bienvenido al bot GetTalent.Este es un bot de preguntas. Por favor, indica cuantas preguntas quieres que te haga:" },
+    { field: 'nombre', prompt: "Por favor, indica tu nombre:" },
     { field: 'question', prompt: "¿Cuanto es 1+1?" }
 ];
 if (useEmulator) {
