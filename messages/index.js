@@ -16,7 +16,7 @@ var bot = new builder.UniversalBot(connector, [
         session.send('Bienvenido al bot GetTalent. Por favor, dime tu nombre: ');
     },
     function (session,results) {
-        session.userData.name=results.response;
+        var nombre=results.response;
         session.send('Este es un bot de preguntas. Por favor, indica cuantas preguntas quieres que te haga: ');
     },
     function (session,results) {
@@ -24,7 +24,7 @@ var bot = new builder.UniversalBot(connector, [
         session.beginDialog('/preguntas');
     },
     function (session, results) {
-        session.send("Gracias "+session.userData.name+" por responder a mis preguntas");
+        session.send("Gracias "+nombre+" por responder a mis preguntas");
     }
 ]);
 //Preguntas que vamos a realizar y guardado de las respuestas
@@ -49,7 +49,6 @@ bot.dialog('/preguntas', [
         }
     }
 ]);
-
 var questions = [
     { field: 'edad', prompt: "¿Cuantos años tienes?" }
 ];
