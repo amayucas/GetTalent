@@ -38,7 +38,7 @@ bot.dialog('/inicio', [
         matches: /get.*talent/i,
   })
   .cancelAction({ 
-      matches: /salir/i,
+      matches: /^salir/i,
       confirmPrompt: "¿Seguro que quieres salir?: (Si/No)"
   })
 bot.dialog('/preguntas', [
@@ -63,7 +63,7 @@ bot.dialog('/preguntas', [
         }
     }
 ]).cancelAction({ 
-      matches: /salir/i,
+      matches: /^salir/i,
       confirmPrompt: "¿Seguro que quieres salir?: (Si/No)"
   })
 var questions = [
