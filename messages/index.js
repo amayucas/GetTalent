@@ -62,7 +62,10 @@ bot.dialog('/preguntas', [
             session.replaceDialog('/preguntas', session.dialogData);
         }
     }
-]);
+]).cancelAction({ 
+      matches: /salir/i,
+      confirmPrompt: "¿Seguro que quieres salir?: (Si/No)"
+  })
 var questions = [
     { field: 'num', prompt: "Por favor, indica cuantas preguntas quieres que te haga:" },
     { field: 'question', prompt: "¿Cuanto es 1+1?" },
