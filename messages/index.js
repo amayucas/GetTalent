@@ -13,13 +13,24 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 
 var bot = new builder.UniversalBot(connector, [
     function (session) {
-        session.beginDialog('/preguntas');
+        session.send("Bienvenido al bot GetTalent.Este es un bot de preguntas.");
+        session.beginDialog('/inicio');
     },
     function (session, results) {
-        session.send("Gracias, por responder a mis preguntas.", results.response);
+        session.endConversation("Gracias, por responder a mis preguntas.", results.response);
     }
 ]);
 
+bot.dialog('/inicio', [
+    function (session) {
+        builder.Prompts.text(session,"Tus respuestas se guardaran en nuestra base de datos. Por favor, introduce tu nombre:");
+    },
+    function (session, results) {
+        var name=results.response;
+        builder.Prompts.text(session,"Vale "+name);
+        session.beginDialog('/preguntas');
+    }
+]);
 bot.dialog('/preguntas', [
     function (session, args) {
         // Guardamos el estado inicial de los parametros
@@ -44,8 +55,8 @@ bot.dialog('/preguntas', [
 ]);
 
 var questions = [
-    { field: 'num', prompt: "Bienvenido al bot GetTalent.Este es un bot de preguntas. Por favor, indica cuantas preguntas quieres que te haga:" },
-    { field: 'question', prompt: "¿Cuanto es 1+1?" },
+    { field: 'num', prompt: "Por favor, indica cuantas preguntas quieres que te haga:" },
+    { field: 'question', prompt: "¿Cuanto es 1+1?"},
     { field: 'question2', prompt: "¿Cuanto es 1+1?" },
     { field: 'question3', prompt: "¿Cuanto es 1+1?" },
     { field: 'question4', prompt: "¿Cuanto es 1+1?" },
@@ -67,6 +78,18 @@ var questions = [
     { field: 'question20', prompt: "¿Cuanto es 1+1?" },
     { field: 'question21', prompt: "¿Cuanto es 1+1?" }
 ];
+bot.on('addbot', function (message) {
+    if (message.action === 'add') {
+        var name = message.user ? message.user.name : null;
+        var reply = new builder.Message()
+                .address(message.address)
+                .text("Hola %s... Gracias por añadirme. Di 'Hola' para ver una demo", name || 'there');
+        bot.send(reply);
+    } else {
+        // delete their data
+    }
+});
+bot.use(builder.Middleware.dialogVersion({ version: 1.0, resetCommand: /^reset/i }));
 if (useEmulator) {
     var restify = require('restify');
     var server = restify.createServer();
