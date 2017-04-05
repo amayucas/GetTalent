@@ -13,16 +13,17 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 
 var bot = new builder.UniversalBot(connector, [
     function (session) {
-        session.send("Bienvenido al bot GetTalent.Este es un bot de preguntas.");
-        session.beginDialog('/inicio');
+        session.send("Para iniciarme di 'get talent'.");
     },
     function (session, results) {
-        session.endConversation("Ya hemos terminado.Gracias por responder a mis preguntas");
+        session.endConversation("Ya hemos terminado.Gracias "+session.userData.name+" por responder a mis preguntas");
     }
 ]);
 
 bot.dialog('/inicio', [
     function (session) {
+        session.send("Bienvenido al bot GetTalent. Este es un bot de preguntas.");
+        session.send("Recuerda: en cualquier momento puedes salir diciendo 'salir'");
         builder.Prompts.text(session,"Tus respuestas se guardaran en nuestra base de datos. Por favor, introduce tu nombre:");
     },
     function (session, results,next) {
@@ -33,7 +34,13 @@ bot.dialog('/inicio', [
     function (session) {
         session.beginDialog('/preguntas');
     }
-]);
+]).triggerAction({ 
+        matches: /get.*talent/i,
+  })
+  .cancelAction({ 
+      matches: /salir/i,
+      confirmPrompt: "¿Seguro que quieres salir?: (Si/No)"
+  })
 bot.dialog('/preguntas', [
     function (session, args) {
         // Guardamos el estado inicial de los parametros
