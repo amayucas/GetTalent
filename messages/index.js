@@ -16,7 +16,7 @@ var bot = new builder.UniversalBot(connector, [
         session.send("Para iniciarme di 'get talent'.");
     },
     function (session, results) {
-        session.endConversation("Ya hemos terminado.Gracias "+session.userData.name+" por responder a mis preguntas");
+        session.endConversation("Ya hemos terminado.Gracias por responder a mis preguntas");
     }
 ]);
 
@@ -45,7 +45,7 @@ bot.dialog('/inicio', [
                 callback(null, 1.0, { topic: 'general' });
                 break;
             case 'salir':
-                confirmPrompt: "¿Seguro que quieres salir?: (Si/No)";
+                ession.endConversation("Nos vemos pronto");
                 break;
             default:
                 callback(null, 0.0);
