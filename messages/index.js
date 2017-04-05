@@ -29,6 +29,7 @@ bot.dialog('/inicio', [
         var name=results.response;
         builder.Prompts.text(session,"Vale "+name);
         session.beginDialog('/preguntas');
+        break;
     }
 ]);
 bot.dialog('/preguntas', [
