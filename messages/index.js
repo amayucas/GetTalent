@@ -28,8 +28,9 @@ bot.dialog('/inicio', [
     function (session, results) {
         var name=results.response;
         builder.Prompts.text(session,"Vale "+name);
+    },
+    function (session) {
         session.beginDialog('/preguntas');
-        break;
     }
 ]);
 bot.dialog('/preguntas', [
