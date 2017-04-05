@@ -17,7 +17,7 @@ var bot = new builder.UniversalBot(connector, [
         session.beginDialog('/inicio');
     },
     function (session, results) {
-        session.endConversation("Gracias %(name)s, por responder a mis preguntas.", results.response);
+        session.endConversation("Gracias %(name)s, por responder a mis preguntas.",session.userData.name);
     }
 ]);
 
@@ -26,8 +26,8 @@ bot.dialog('/inicio', [
         builder.Prompts.text(session,"Tus respuestas se guardaran en nuestra base de datos. Por favor, introduce tu nombre:");
     },
     function (session, results,next) {
-        var name=results.response;
-        builder.Prompts.text(session,"Vale "+name);
+        session.userData.name=results.response;
+        builder.Prompts.text(session,"Vale "+session.userData.name);
         next();
     },
     function (session) {
