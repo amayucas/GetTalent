@@ -35,12 +35,24 @@ bot.dialog('/inicio', [
         session.beginDialog('/preguntas');
     }
 ]).triggerAction({ 
-        matches: /get.*talent/i,
-  })
-  .cancelAction({ 
-      matches: /^salir/i,
-      confirmPrompt: "¿Seguro que quieres salir?: (Si/No)"
-  })
+    onFindAction: function (context, callback) {
+        // Recognize users utterance
+        switch (context.message.text.toLowerCase()) {
+            case 'get talent':
+                // You can trigger the action with callback(null, 1.0) but you're also
+                // allowed to return additional properties which will be passed along to
+                // the triggered dialog.
+                callback(null, 1.0, { topic: 'general' });
+                break;
+            case 'salir':
+                confirmPrompt: "¿Seguro que quieres salir?: (Si/No)";
+                break;
+            default:
+                callback(null, 0.0);
+                break;
+        }
+    } 
+});
 bot.dialog('/preguntas', [
     function (session, args) {
         // Guardamos el estado inicial de los parametros
@@ -62,10 +74,7 @@ bot.dialog('/preguntas', [
             session.replaceDialog('/preguntas', session.dialogData);
         }
     }
-]).cancelAction({ 
-      matches: /^salir/i,
-      confirmPrompt: "¿Seguro que quieres salir?: (Si/No)"
-  })
+]);
 var questions = [
     { field: 'num', prompt: "Por favor, indica cuantas preguntas quieres que te haga:" },
     { field: 'question', prompt: "¿Cuanto es 1+1?" },
