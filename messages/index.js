@@ -59,7 +59,7 @@ bot.dialog('/preguntas', [
 var questions = [
     { field: 'num', prompt: "Por favor, indica cuantas preguntas quieres que te haga:" },
     { field: 'question', prompt: "¿Cuanto es 1+1?",Prompts:"Pizza|Drinks|Extras"},
-    { field: 'question2',builder.Prompts.choice() },
+    { field: 'question2', prompt:"¿Cuanto es 1+1?"},
     { field: 'question3', prompt:(builder.Prompts.choice(session,"¿Cuanto es 1+1?",['1','2','3'])) },
     { field: 'question4', prompt: "¿Cuanto es 1+1?" },
     { field: 'question5', prompt: "¿Cuanto es 1+1?" },
