@@ -25,9 +25,10 @@ bot.dialog('/inicio', [
     function (session) {
         builder.Prompts.text(session,"Tus respuestas se guardaran en nuestra base de datos. Por favor, introduce tu nombre:");
     },
-    function (session, results) {
+    function (session, results,next) {
         var name=results.response;
         builder.Prompts.text(session,"Vale "+name);
+        next();
     },
     function (session) {
         session.beginDialog('/preguntas');
