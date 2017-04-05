@@ -17,7 +17,7 @@ var bot = new builder.UniversalBot(connector, [
         session.beginDialog('/inicio');
     },
     function (session, results) {
-        session.endConversation("Gracias, por responder a mis preguntas.", results.response);
+        session.endConversation("Gracias %(name)s, por responder a mis preguntas.", results.response);
     }
 ]);
 
