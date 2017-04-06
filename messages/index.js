@@ -35,7 +35,7 @@ bot.dialog('/inicio', [
         session.beginDialog('/preguntas');
     }
 ]).triggerAction({ 
-    onFindAction: function (context, callback) {
+    onFindAction: function (session,context, callback) {
         // Recognize users utterance
         switch (context.message.text.toLowerCase()) {
             case 'get talent':
