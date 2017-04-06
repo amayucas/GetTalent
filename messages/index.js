@@ -66,7 +66,7 @@ bot.dialog('/preguntas', [
         // Condición de salida
         if (session.dialogData.index >session.dialogData.form['num']) {
             // Podemos mostrar los resultados o solo dar las gracias
-            session.endDialogWithResult({ response: session.dialogData.form });
+            session.endDialog("Ya hemos terminado.Gracias por responder a mis preguntas");
         } else {
             // Siguiente pregunta
             session.replaceDialog('/preguntas', session.dialogData);
