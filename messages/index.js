@@ -23,7 +23,6 @@ var bot = new builder.UniversalBot(connector, [
 bot.dialog('/inicio', [
     function (session) {
         session.send("Bienvenido al bot GetTalent. Este es un bot de preguntas.");
-        session.send("Recuerda: en cualquier momento puedes salir diciendo 'salir'");
         builder.Prompts.text(session,"Tus respuestas se guardaran en nuestra base de datos. Por favor, introduce tu nombre:");
     },
     function (session, results,next) {
