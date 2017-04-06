@@ -45,7 +45,7 @@ bot.dialog('/inicio', [
                 callback(null, 1.0, { topic: 'general' });
                 break;
             case 'salir':
-                ession.endConversation("Nos vemos pronto");
+                session.endConversation("Nos vemos pronto");
                 break;
             default:
                 callback(null, 0.0);
