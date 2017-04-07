@@ -44,7 +44,7 @@ bot.dialog('/inicio', [
                 callback(null, 1.0, { topic: 'general' });
                 break;
             case 'salir':
-                callback(null,2.0);
+                callback(null,-1.0);
                 break;
             default:
                 callback(null, 0.0);
