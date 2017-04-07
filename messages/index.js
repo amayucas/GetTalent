@@ -80,9 +80,10 @@ bot.dialog('/preguntas', [
         var field = questions[session.dialogData.index++].field;
         if(session.dialogData.index%5==0){
             session.dialogData.form[field] = results.response.index;
-            if(session.dialogData.form[field]==1)
+            if(session.dialogData.form[field]==1){
                 session.endDialog("Gracias por responder a mis preguntas.");
                 next();
+            }
         }
         else
             session.dialogData.form[field] = results.response;
