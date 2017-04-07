@@ -60,7 +60,7 @@ bot.dialog('/nuevo',[
     },
     function(session,results,next){
         session.userData.name=results.response;
-        builder.Prompts.text(session,"Vale "+session.userData.name+"Recuerda que puedes salir en cualquier momento diciendo 'get talent'.Empecemos el test");
+        builder.Prompts.text(session,"Vale "+session.userData.name+". Recuerda que puedes salir en cualquier momento diciendo 'get talent'.Empecemos el test");
         next();
     },
     function (session) {
