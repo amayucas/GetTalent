@@ -14,7 +14,7 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 var bot = new builder.UniversalBot(connector, [
     function (session) {
         session.send("Para iniciarme di 'get talent'.");
-
+   ,choices:"1|2|2|4"},
     function (session, results) {
         session.endConversation("Ya hemos terminado.Gracias por responder a mis preguntas");
     }
@@ -24,12 +24,12 @@ bot.dialog('/inicio', [
     function (session) {
         session.send("Bienvenido al bot GetTalent. Este es un bot de preguntas.");
         builder.Prompts.text(session,"Tus respuestas se guardaran en nuestra base de datos. Por favor, introduce tu nombre:");
-
+   ,choices:"1|2|2|4"},
     function (session, results,next) {
         session.userData.name=results.response;
         builder.Prompts.text(session,"Vale "+session.userData.name);
         next();
-
+   ,choices:"1|2|2|4"},
     function (session) {
         session.beginDialog('/preguntas');
     }
@@ -59,7 +59,7 @@ bot.dialog('/preguntas', [
         session.dialogData.form = args ? args.form : {};
         // Preguntamos
         builder.Prompts.choice(session, questions[session.dialogData.index].prompt,questions[session.dialogData.index].choices);
-
+   ,choices:"1|2|2|4"},
     function (session, results) {
         // Guardamos la respuesta
         var field = questions[session.dialogData.index++].field;
@@ -74,61 +74,24 @@ bot.dialog('/preguntas', [
         }
     }
 ]);
-
 var questions = [
     { field: 'question', prompt: "Which of these access specifiers must be used for main() method? ",choices:"private|public|protected|None of the mentioned"},
     { field: 'question1', prompt: "Which of these is used to access member of class before object of that class is created?",choices: "public|private|static|protected"},
     { field: 'question2', prompt:"Which of these is used as default for a member of a class if no access specifier is used for it?",choices: "private|public|public, within its own package|protected"},
     { field: 'question3', prompt:"What is the process by which we can control what parts of a program can access the members of a class?" ,choices:"Polymorphism|Abstraction|Encapsulation|Recursion"},
-    { field: 'question4', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question5', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question6', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question7', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question8', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question9', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question10', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question11', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question12', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question13', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question14', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question15', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question16', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question17', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question18', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question19', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question20', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question21', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question22', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question23', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question24', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question25', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question26', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question27', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question28', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question29', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question30', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question31', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question32', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question33', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question34', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question35', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question36', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question37', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question38', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question39', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question40', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question41', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question42', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question43', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question44', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question45', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question46', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question47', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question48', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question49', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"},
-    { field: 'question50', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"}
+    { field: 'question4', prompt: "¿Cuanto es 1+1?",choices:"1|2|2|4"}
 ];
-
+bot.on('addbot', function (message) {
+    if (message.action === 'add') {
+        var name = message.user ? message.user.name : null;
+        var reply = new builder.Message()
+                .address(message.address)
+                .text("Hola %s... Gracias por añadirme. Di 'Hola' para ver una demo", name || 'there');
+        bot.send(reply);
+    } else {
+        // delete their data
+    }
+});
 bot.use(builder.Middleware.dialogVersion({ version: 1.0, resetCommand: /^reset/i }));
 if (useEmulator) {
     var restify = require('restify');
