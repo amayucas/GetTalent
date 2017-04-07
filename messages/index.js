@@ -16,7 +16,7 @@ var bot = new builder.UniversalBot(connector, [
         session.send("Para iniciarme di 'get talent'.");
     },
     function (session, results) {
-        session.endConversation("Ya hemos terminado.Gracias por responder a mis preguntas");
+        session.endConversation("Ya hemos terminado. Gracias por responder a mis preguntas.");
     }
 ]);
 
@@ -31,7 +31,7 @@ bot.dialog('/inicio', [
                 session.beginDialog('/nuevo');
                 break;
             case 1:
-                session.endDialog("No dudes en volver a usarme cuando quieras.Nos vemos");
+                session.endDialog("No dudes en volver a usarme cuando quieras. Nos vemos.");
                 break;
             default:
                 session.endDialog();
@@ -60,7 +60,7 @@ bot.dialog('/nuevo',[
     },
     function(session,results,next){
         session.userData.name=results.response;
-        builder.Prompts.text(session,"Vale "+session.userData.name+". Recuerda que puedes salir en cualquier momento diciendo 'get talent'.Empecemos el test:");
+        builder.Prompts.text(session,"Vale "+session.userData.name+". Recuerda que puedes salir en cualquier momento diciendo 'get talent'. Empecemos el test:");
         next();
     },
     function (session) {
@@ -82,7 +82,7 @@ bot.dialog('/preguntas', [
         // Condición de salida
         if (session.dialogData.index >=questions.length) {
             // Podemos mostrar los resultados o solo dar las gracias
-            session.endDialog("Ya hemos terminado.Gracias por responder a mis preguntas");
+            session.endDialog("Ya hemos terminado. Gracias por responder a mis preguntas.");
         } else {
             // Siguiente pregunta
             session.replaceDialog('/preguntas', session.dialogData);
