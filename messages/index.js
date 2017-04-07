@@ -39,7 +39,7 @@ bot.dialog('/inicio', [
         }
     }
 ]).triggerAction({ 
-    onFindAction: function (session,context, callback) {
+    onFindAction: function (context, callback) {
         // Recognize users utterance
         switch (context.message.text.toLowerCase()) {
             case 'get talent':
