@@ -34,7 +34,7 @@ bot.dialog('/inicio', [
         session.beginDialog('/preguntas');
     }
 ]).triggerAction({ 
-    onFindAction: function (context, callback) {
+    onFindAction: function (session,context, callback) {
         // Recognize users utterance
         switch (context.message.text.toLowerCase()) {
             case 'get talent':
@@ -44,7 +44,7 @@ bot.dialog('/inicio', [
                 callback(null, 1.0, { topic: 'general' });
                 break;
             case 'salir':
-                callback(null,0.0);
+                session.endDialog("Ya hemos terminado.Gracias por responder a mis preguntas");
                 break;
             default:
                 callback(null, 0.0);
