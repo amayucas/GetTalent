@@ -79,7 +79,7 @@ bot.dialog('/preguntas', [
         // Guardamos la respuesta
         var field = questions[session.dialogData.index++].field;
         session.dialogData.form[field] = results.response;
-        if(session.dialogData.index%5==0 && session.dialogData.form[field]==2)
+        if(session.dialogData.form[field]=='Salir')
             session.endDialog("Gracias por responder a mis preguntas.");
         // Condición de salida
         if (session.dialogData.index >=questions.length) {
