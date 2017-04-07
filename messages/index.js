@@ -44,7 +44,7 @@ bot.dialog('/inicio', [
                 callback(null, 1.0, { topic: 'general' });
                 break;
             case 'salir':
-                session.endDialog("Ya hemos terminado.Gracias por responder a mis preguntas");
+                session.endConversation("Ya hemos terminado.Gracias por responder a mis preguntas");
                 break;
             default:
                 callback(null, 0.0);
