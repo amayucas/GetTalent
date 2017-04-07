@@ -65,7 +65,7 @@ bot.dialog('/preguntas', [
         var field = questions[session.dialogData.index++].field;
         session.dialogData.form[field] = results.response;
         // Condición de salida
-        if (session.dialogData.index >session.dialogData.form['num']) {
+        if (session.dialogData.index >=questions.length) {
             // Podemos mostrar los resultados o solo dar las gracias
             session.endDialog("Ya hemos terminado.Gracias por responder a mis preguntas");
         } else {
@@ -75,7 +75,7 @@ bot.dialog('/preguntas', [
     }
 ]);
 var questions = [
-    { field: 'num', prompt: "Por favor, indica cuantas preguntas quieres que te haga:",choices:"" },
+    { field: 'num', prompt: "Por favor, indica cuantas preguntas quieres que te haga:",choices:"1|2|3" },
     { field: 'question', prompt: "¿Cuanto es 1+1?",choices: "1|2|3|4"},
     { field: 'question2', prompt:"¿Cuanto es 1+1?",choices: "1|2|3|4"},
     { field: 'question3', prompt:"¿Cuanto es 1+1?" },
