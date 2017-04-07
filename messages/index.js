@@ -79,6 +79,8 @@ bot.dialog('/preguntas', [
         // Guardamos la respuesta
         var field = questions[session.dialogData.index++].field;
         session.dialogData.form[field] = results.response;
+        if(session.dialogData.index%5==0 && session.dialogData.form[field]==1)
+            session.endDialog("Gracias por responder a mis preguntas.");
         // Condición de salida
         if (session.dialogData.index >=questions.length) {
             // Podemos mostrar los resultados o solo dar las gracias
@@ -94,7 +96,7 @@ var questions = [
     { field: 'question1', prompt: "Which of these is used to access member of class before object of that class is created?",choices: "public|private|static|protected"},
     { field: 'question2', prompt:"Which of these is used as default for a member of a class if no access specifier is used for it?",choices: "private|public|public, within its own package|protected"},
     { field: 'question3', prompt:"What is the process by which we can control what parts of a program can access the members of a class?" ,choices:"Polymorphism|Abstraction|Encapsulation|Recursion"},
-    { field: 'question4', prompt: "¿Cuanto es 1+1?",choices:"1|2|3|4"},
+    { field: 'question4', prompt: "Ya llevamos "+session.dialogData.index+" preguntas.",choices:"Continuar|Salir"},
     { field: 'question5', prompt: "¿Cuanto es 1+1?",choices:"1|2|3|4"},
     { field: 'question6', prompt: "¿Cuanto es 1+1?",choices:"1|2|3|4"},
     { field: 'question7', prompt: "¿Cuanto es 1+1?",choices:"1|2|3|4"},
