@@ -23,15 +23,20 @@ var bot = new builder.UniversalBot(connector, [
 bot.dialog('/inicio', [
     function (session) {
         session.send("Bienvenido al bot GetTalent. Este es un bot de preguntas.");
-        builder.Prompts.text(session,"Tus respuestas se guardaran en nuestra base de datos. Por favor, introduce tu nombre:");
+        builder.Prompts.choice(session,"Elige una opción:","Empezar un test|Salir");
     },
-    function (session, results,next) {
-        session.userData.name=results.response;
-        builder.Prompts.text(session,"Vale "+session.userData.name);
-        next();
-    },
-    function (session) {
-        session.beginDialog('/preguntas');
+    function (session, results){
+        switch (results.response.index) {
+            case 0:
+                session.beginDialog('/nuevo');
+                break;
+            case 1:
+                session.endDialog("No dudes en volver a usarme cuando quieras.Nos vemos");
+                break;
+            default:
+                session.endDialog();
+                break;
+        }
     }
 ]).triggerAction({ 
     onFindAction: function (session,context, callback) {
@@ -43,15 +48,25 @@ bot.dialog('/inicio', [
                 // the triggered dialog.
                 callback(null, 1.0, { topic: 'general' });
                 break;
-            case 'salir':
-                session.beginDialog('/fin');
-                break;
             default:
                 callback(null, 0.0);
                 break;
         }
     } 
 });
+bot.dialog('/nuevo',[
+    function(session){
+        builder.Prompts.text(session,"Tus respuestas se guardaran en nuestra base de datos. Por favor, introduce tu nombre:");
+    },
+    function(session,results,next){
+        session.userData.name=results.response;
+        builder.Prompts.text(session,"Vale "+session.userData.name);
+        next();
+    },
+    function (session) {
+        session.beginDialog('/preguntas');
+    }
+]);
 bot.dialog('/preguntas', [
     function (session, args) {
         // Guardamos el estado inicial de los parametros
@@ -72,11 +87,6 @@ bot.dialog('/preguntas', [
             // Siguiente pregunta
             session.replaceDialog('/preguntas', session.dialogData);
         }
-    }
-]);
-bot.dialog('/fin',[
-    function(session){
-        session.endDialog("Recuerda que puedes repetir el cuestionario diciendo 'get talent'.");
     }
 ]);
 var questions = [
