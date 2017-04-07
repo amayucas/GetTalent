@@ -44,7 +44,7 @@ bot.dialog('/inicio', [
                 callback(null, 1.0, { topic: 'general' });
                 break;
             case 'salir':
-                session.endConversation("Ya hemos terminado.Gracias por responder a mis preguntas");
+                session.beginDialog('/fin');
                 break;
             default:
                 callback(null, 0.0);
@@ -74,7 +74,11 @@ bot.dialog('/preguntas', [
         }
     }
 ]);
-
+bot.dialog('/fin',[
+    function(session){
+        session.endDialog("Recuerda que puedes repetir el cuestionario diciendo 'get talent'.");
+    }
+]);
 var questions = [
     { field: 'question', prompt: "Which of these access specifiers must be used for main() method? ",choices:"private|public|protected|None of the mentioned"},
     { field: 'question1', prompt: "Which of these is used to access member of class before object of that class is created?",choices: "public|private|static|protected"},
