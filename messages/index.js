@@ -75,14 +75,14 @@ bot.dialog('/preguntas', [
         // Preguntamos
         builder.Prompts.choice(session, questions[session.dialogData.index].prompt,questions[session.dialogData.index].choices);
     },
-    function (session, results,next) {
+    function (session, results) {
         // Guardamos la respuesta
         var field = questions[session.dialogData.index++].field;
         if(session.dialogData.index%5==0){
             session.dialogData.form[field] = results.response.index;
             if(session.dialogData.form[field]==1){
                 session.endDialog("Gracias por responder a mis preguntas.");
-                next();
+                break;
             }
         }
         else
