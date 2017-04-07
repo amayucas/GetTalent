@@ -81,7 +81,7 @@ bot.dialog('/preguntas', [
         if(session.dialogData.index%5==0){
             session.dialogData.form[field] = results.response.index;
             if(session.dialogData.form[field]==1){
-                session.dialogData.form[field]=='get talent';
+                exit(session);
             }
         }
         else
@@ -96,6 +96,9 @@ bot.dialog('/preguntas', [
         }
     }
 ]);
+function exit(session){
+    session.endDialog("Gracias por responder a mis preguntas.");
+};
 var questions = [
     { field: 'question', prompt: "Which of these access specifiers must be used for main() method? ",choices:"private|public|protected|None of the mentioned"},
     { field: 'question1', prompt: "Which of these is used to access member of class before object of that class is created?",choices: "public|private|static|protected"},
