@@ -44,6 +44,7 @@ bot.dialog('/inicio', [
                 callback(null, 1.0, { topic: 'general' });
                 break;
             case 'salir':
+                callback();
                 break;
             default:
                 callback(null, 0.0);
@@ -57,7 +58,7 @@ bot.dialog('/preguntas', [
         session.dialogData.index = args ? args.index : 0;
         session.dialogData.form = args ? args.form : {};
         // Preguntamos
-        builder.Prompts.text(session, questions[session.dialogData.index].prompt);
+        builder.Prompts.choice(session, questions[session.dialogData.index].prompt,questions[session.dialogData.index].choices);
     },
     function (session, results) {
         // Guardamos la respuesta
@@ -75,8 +76,8 @@ bot.dialog('/preguntas', [
 ]);
 var questions = [
     { field: 'num', prompt: "Por favor, indica cuantas preguntas quieres que te haga:" },
-    { field: 'question', prompt: "¿Cuanto es 1+1?" },
-    { field: 'question2', prompt:"¿Cuanto es 1+1?" },
+    { field: 'question', prompt: "¿Cuanto es 1+1?",choices: ["1","2","3","4"]},
+    { field: 'question2', prompt:"¿Cuanto es 1+1?",choices: ["1","2","3","4"]},
     { field: 'question3', prompt:"¿Cuanto es 1+1?" },
     { field: 'question4', prompt: "¿Cuanto es 1+1?" },
     { field: 'question5', prompt: "¿Cuanto es 1+1?" },
