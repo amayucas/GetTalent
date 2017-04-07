@@ -58,10 +58,10 @@ bot.dialog('/nuevo',[
     function(session){
         builder.Prompts.text(session,"Tus respuestas se guardaran en nuestra base de datos. Por favor, introduce tu nombre:");
     },
-    function(session,results){
+    function(session,results,next){
         session.userData.name=results.response;
-        builder.Prompts.text(session,"Vale "+session.userData.name);
-        builder.Prompts.text(session,"Recuerda que puedes salir en cualquier momento diciendo 'get talent'.Empecemos el test");
+        builder.Prompts.text(session,"Vale "+session.userData.name+"Recuerda que puedes salir en cualquier momento diciendo 'get talent'.Empecemos el test");
+        next();
     },
     function (session) {
         session.beginDialog('/preguntas');
