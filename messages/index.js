@@ -49,7 +49,7 @@ bot.dialog('/nuevo',[
         session.beginDialog('/preguntas');
     }
 ]).triggerAction({ matches: 'get talent' });
-bot.endConversationAction('Salida forzosa',"De acuerdo, nos vemos pronto",{matches: 'Salir'});
+bot.endConversationAction('Salida forzosa',"De acuerdo, nos vemos pronto.",{matches: 'Salir'});
 bot.dialog('/preguntas', [
     function (session, args) {
         // Guardamos el estado inicial de los parametros
