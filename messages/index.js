@@ -93,13 +93,13 @@ bot.dialog('/preguntas2', [
         // Guardamos el estado inicial de los parametros
         session.dialogData.index = args ? args.index : 0;
         session.dialogData.form = args ? args.form : {};
-        setTimeout(function() {
-           session.endDialog("Se han superado los 5 segundos para contestar.Siguiente pregunta:");
-        }, 5000);
         // Preguntamos
         builder.Prompts.choice(session, questions2[session.dialogData.index].prompt,questions2[session.dialogData.index].choices);
     },
     function (session, results) {
+        setTimeout(function() {
+           session.endDialog("Se han superado los 5 segundos para contestar.Siguiente pregunta:");
+        }, 5000);
         // Guardamos la respuesta
         var field = questions2[session.dialogData.index++].field;
         session.dialogData.form[field] = results.response;
@@ -118,13 +118,13 @@ bot.dialog('/preguntas3', [
         // Guardamos el estado inicial de los parametros
         session.dialogData.index = args ? args.index : 0;
         session.dialogData.form = args ? args.form : {};
-        setTimeout(function() {
-           session.endDialog("Se han superado los 5 segundos para contestar.Siguiente pregunta:");
-        }, 5000);
         // Preguntamos
         builder.Prompts.choice(session, questions3[session.dialogData.index].prompt,questions3[session.dialogData.index].choices);
     },
     function (session, results) {
+        setTimeout(function() {
+           session.endDialog("Se han superado los 5 segundos para contestar.Siguiente pregunta:");
+        }, 5000);
         // Guardamos la respuesta
         var field = questions3[session.dialogData.index++].field;
         session.dialogData.form[field] = results.response;
