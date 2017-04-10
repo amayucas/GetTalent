@@ -14,9 +14,6 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 var bot = new builder.UniversalBot(connector, [
     function (session) {
         session.send("Has dicho: %s .Para iniciarme di 'get talent'.",session.message.text);
-    },
-    function (session, results) {
-        session.endConversation("Ya hemos terminado. Gracias por responder a mis preguntas.");
     }
 ]);
 bot.recognizer({
