@@ -59,7 +59,7 @@ bot.dialog('/preguntas', [
         builder.Prompts.choice(session, questions[session.dialogData.index].prompt,questions[session.dialogData.index].choices);
     },
     function (session, results) {
-        setTimeout(function(session) {
+        setTimeout(function() {
            session.send("Se han superado los 5s para contestar");
            session.endDialog("Ya hemos terminado. Gracias por responder a mis preguntas.");
         }, 5000);
