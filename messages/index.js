@@ -95,6 +95,9 @@ bot.dialog('/preguntas2', [
         session.dialogData.form = args ? args.form : {};
         // Preguntamos
         builder.Prompts.choice(session, questions2[session.dialogData.index].prompt,questions2[session.dialogData.index].choices);
+        setTimeout(function() {
+           session.endDialog("Se han superado los 5 segundos para contestar.Siguiente pregunta:");
+        }, 5000);
     },
     function (session, results) {
         setTimeout(function() {
@@ -120,6 +123,9 @@ bot.dialog('/preguntas3', [
         session.dialogData.form = args ? args.form : {};
         // Preguntamos
         builder.Prompts.choice(session, questions3[session.dialogData.index].prompt,questions3[session.dialogData.index].choices);
+        setTimeout(function() {
+           session.endDialog("Se han superado los 5 segundos para contestar.Siguiente pregunta:");
+        }, 5000);
     },
     function (session, results) {
         setTimeout(function() {
