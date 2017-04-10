@@ -37,7 +37,7 @@ bot.recognizer({
 });
 bot.dialog('/nuevo',[
     function(session){
-        session.send("Bienvenido al bot GetTalent. Este es un bot de preguntas.");
+        session.send("Bienvenido al bot GetTalent. Este es un bot de preguntas. Tienes 5s para responder a cada una de ellas. ");
         builder.Prompts.text(session,"Tus respuestas se guardaran en nuestra base de datos. Por favor, introduce tu nombre:");
     },
     function(session,results,next){
@@ -59,19 +59,17 @@ bot.dialog('/preguntas', [
         builder.Prompts.choice(session, questions[session.dialogData.index].prompt,questions[session.dialogData.index].choices);
     },
     function (session, results) {
-        setTimeout(function() {
-           session.send("Se han superado los 5s para contestar");
-           session.endDialog("Ya hemos terminado. Gracias por responder a mis preguntas.");
-        }, 5000);
         // Guardamos la respuesta
         var field = questions[session.dialogData.index++].field;
         if(session.dialogData.index%5==0){
             session.dialogData.form[field] = results.response.index;
             switch(session.dialogData.form[field]){
                 case 0:
+                    session.send("A partir de ahora solo tienes 5s para responder.");
                     session.beginDialog('/preguntas2');
                     break;
                 case 1:
+                    session.send("A partir de ahora solo tienes 5s para responder.");
                     session.beginDialog('/preguntas3');
                     break;
                 default:
@@ -99,6 +97,9 @@ bot.dialog('/preguntas2', [
         builder.Prompts.choice(session, questions2[session.dialogData.index].prompt,questions2[session.dialogData.index].choices);
     },
     function (session, results) {
+        setTimeout(function() {
+           session.endDialog("Se han superado los 5 segundos para contestar.Siguiente pregunta:");
+        }, 5000);
         // Guardamos la respuesta
         var field = questions2[session.dialogData.index++].field;
         session.dialogData.form[field] = results.response;
@@ -121,6 +122,9 @@ bot.dialog('/preguntas3', [
         builder.Prompts.choice(session, questions3[session.dialogData.index].prompt,questions3[session.dialogData.index].choices);
     },
     function (session, results) {
+        setTimeout(function() {
+           session.endDialog("Se han superado los 5 segundos para contestar.Siguiente pregunta:");
+        }, 5000);
         // Guardamos la respuesta
         var field = questions3[session.dialogData.index++].field;
         session.dialogData.form[field] = results.response;
