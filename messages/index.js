@@ -85,7 +85,7 @@ bot.dialog('/preguntas', [
             session.replaceDialog('/preguntas', session.dialogData);
         }
     }
-],500);
+]);
 bot.dialog('/preguntas2', [
     function (session, args) {
         // Guardamos el estado inicial de los parametros
@@ -107,7 +107,7 @@ bot.dialog('/preguntas2', [
             session.replaceDialog('/preguntas2', session.dialogData);
         }
     }
-],500);
+]);
 bot.dialog('/preguntas3', [
     function (session, args) {
         // Guardamos el estado inicial de los parametros
@@ -129,7 +129,7 @@ bot.dialog('/preguntas3', [
             session.replaceDialog('/preguntas3', session.dialogData);
         }
     }
-],500);
+]);
 var questions2 = [
     { field: 'question5', prompt: "Which of the following statements are incorrect? ",choices:"public members of class can be accessed by any code in the program|private members of class can only be accessed by other members of the class|private members of class can be inherited by a sub class, and become protected members in sub class|protected members of a class can be inherited by a sub class, and become private members of the sub class"},
     { field: 'question6', prompt: "Which of these access specifier must be used for class so that it can be inherited by another sub class?",choices:"public|private|protected|None of the mentioned"},
