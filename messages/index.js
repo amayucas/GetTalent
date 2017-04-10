@@ -65,11 +65,11 @@ bot.dialog('/preguntas', [
             session.dialogData.form[field] = results.response.index;
             switch(session.dialogData.form[field]){
                 case 0:
-                    session.send("A partir de ahora solo tienes 5s para responder.");
+                    session.send("Esta es la última pregunta sin tiempo. A partir de ahora tendras 5s para responder a las preguntas. ");
                     session.beginDialog('/preguntas2');
                     break;
                 case 1:
-                    session.send("A partir de ahora solo tienes 5s para responder.");
+                    session.send("Esta es la última pregunta sin tiempo. A partir de ahora tendras 5s para responder a las preguntas. ");
                     session.beginDialog('/preguntas3');
                     break;
                 default:
