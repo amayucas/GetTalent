@@ -37,7 +37,7 @@ bot.recognizer({
 });
 bot.dialog('/nuevo',[
     function(session){
-        session.send("Bienvenido al bot GetTalent. Este es un bot de preguntas. Tienes 5s para responder a cada una de ellas. ");
+        session.send("Bienvenido al bot GetTalent. Este es un bot de preguntas.");
         builder.Prompts.text(session,"Tus respuestas se guardaran en nuestra base de datos. Por favor, introduce tu nombre:");
     },
     function(session,results,next){
