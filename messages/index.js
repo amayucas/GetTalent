@@ -62,11 +62,9 @@ bot.dialog('/preguntas', [
             session.dialogData.form[field] = results.response.index;
             switch(session.dialogData.form[field]){
                 case 0:
-                    session.send("Esta es la última pregunta sin tiempo. A partir de ahora tendras 30s para responder a todas las preguntas. ");
                     session.beginDialog('/preguntas2');
                     break;
                 case 1:
-                    session.send("Esta es la última pregunta sin tiempo. A partir de ahora tendras 60s para responder a todas las preguntas. ");
                     session.beginDialog('/preguntas3');
                     break;
                 default:
@@ -94,9 +92,6 @@ bot.dialog('/preguntas2', [
         builder.Prompts.choice(session, questions2[session.dialogData.index].prompt,questions2[session.dialogData.index].choices);
     },
     function (session, results) {
-        setTimeout(function() {
-           session.endConversation("Se han superado los 30 segundos para contestar.");
-        }, 30000);
         // Guardamos la respuesta
         var field = questions2[session.dialogData.index++].field;
         session.dialogData.form[field] = results.response;
@@ -119,9 +114,6 @@ bot.dialog('/preguntas3', [
         builder.Prompts.choice(session, questions3[session.dialogData.index].prompt,questions3[session.dialogData.index].choices);
     },
     function (session, results) {
-        setTimeout(function() {
-           session.endConversation("Se han superado los 60 segundos para contestar.");
-        }, 60000);
         // Guardamos la respuesta
         var field = questions3[session.dialogData.index++].field;
         session.dialogData.form[field] = results.response;
